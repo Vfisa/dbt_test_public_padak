@@ -1,0 +1,69 @@
+
+version: 2
+
+models:
+  - name: "project"
+    +full_refresh: True
+    description: "Final project table"
+    columns:
+      - name: '"project_id"'
+        description: "The primary key for this table"
+        meta:
+          dimension:
+            sql: '${TABLE}."project_id"'
+        tests:
+          - unique
+          - not_null
+      - name: '"project_key"'
+        description: "Project Jira key"
+        meta:
+          dimension:
+            sql: '${TABLE}."project_key"'
+        tests:
+          - not_null
+      - name: '"project_name"'
+        description: "Project Name"
+        meta:
+          dimension:
+            sql: '${TABLE}."project_name"'
+        tests:
+          - not_null
+      - name: '"project_category_name"'
+        description: "Project category"
+        tests:
+        meta:
+          dimension:
+            sql: '${TABLE}."project_category_name"'
+          metrics:
+            num_unique_project_categories: # name of your metric
+              type: count_distinct # metric type
+      - name: '"archived"'
+        description: "Archived flag"
+        tests:
+        meta:
+          dimension:
+            sql: '${TABLE}."archived"'
+          metrics:
+            num_archived:
+              type: count
+      - name: '"sfdc_id"'
+        description: "Project SFDC ID"
+        meta:
+          dimension:
+            sql: '${TABLE}."sfdc_id"'
+        tests:
+          - not_null
+      - name: '"budget"'
+        description: "Project Budget"
+        tests:
+        meta:
+          metrics:
+            total_budget:
+              type: "sum"
+      - name: '"hour_rate"'
+        description: "Project hour rate"
+        tests:
+        meta:
+          metrics:
+            avg_project_rate:
+              type: "average"

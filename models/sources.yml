@@ -1,0 +1,44 @@
+version: 2
+
+sources:
+  - name: '"WORKSPACE_822221066"'
+    database: SAPI_9119
+    description: Jira data tables extracted from Keboola Jira Account
+    freshness: # default freshness
+      warn_after: {count: 1, period: day}
+      error_after: {count: 30, period: day}
+    loaded_at_field: '"_timestamp"'
+    tables:
+      - name: '"projects"'
+        description: >
+          List of projects
+        columns:
+          - name: '"id"'
+            description: Primary key of the orders table
+            tests:
+              - unique
+              - not_null
+          - name: '"key"'
+            description: Note that the status can change over time
+          - name: '"name"'
+            description: Project name
+          - name: '"description"'
+            description: Project description
+          - name: '"project_category_id"'
+            description: Project category ID
+          - name: '"project_category_name"'
+            description: Project category
+          - name: '"project_category_description"'
+            description: Project category description
+          - name: '"project_type_key"'
+            description: project type key
+          - name: '"is_private"'
+            description: Project marked as private
+          - name: '"archived"'
+            description: Project archived
+          - name: '"archived_by_account_id"'
+            description: archived_by_account_id
+          - name: '"archived_by_display_name"'
+            description: archived_by_display_name
+          - name: '"_timestamp"'
+            description: Keboola-generated timestamp of the last edit
