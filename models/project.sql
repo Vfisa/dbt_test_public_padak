@@ -28,7 +28,7 @@ with "project" as (
             ELSE PARSE_JSON("description"):PRICE::VARCHAR(255)::FLOAT
             END AS "hour_rate"
     FROM
-        {{ source('"WORKSPACE_822221066"', '"projects"') }}
+        {{ source('WORKSPACE_822221066', 'projects') }}
     WHERE
         "project_category_id" IN ('10001','10004') -- Project Implementation and Internal
         AND
